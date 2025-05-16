@@ -12,5 +12,6 @@ int main()
 
     PRINT("Hello from CH570!\r\n");
 
-    while (1);
+    while (1)
+        ;
 }
