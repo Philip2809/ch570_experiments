@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.2
  * Date               : 2022/01/18
- * Description        : RTC≈‰÷√º∞∆‰≥ı ºªØ
+ * Description        : RTCÈÖçÁΩÆÂèäÂÖ∂ÂàùÂßãÂåñ
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -11,7 +11,7 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Õ∑Œƒº˛∞¸∫¨ */
+/* Â§¥Êñá‰ª∂ÂåÖÂê´ */
 #include "HAL.h"
 
 /*********************************************************************
@@ -31,9 +31,9 @@ uint32_t lsiFrq;
 /*******************************************************************************
  * @fn      RTC_SetTignTime
  *
- * @brief   ≈‰÷√RTC¥•∑¢ ±º‰
+ * @brief   ÈÖçÁΩÆRTCËß¶ÂèëÊó∂Èó¥
  *
- * @param   time    - ¥•∑¢ ±º‰.
+ * @param   time    - Ëß¶ÂèëÊó∂Èó¥.
  *
  * @return  None.
  */
@@ -48,7 +48,7 @@ void RTC_SetTignTime(uint32_t time)
 /*******************************************************************************
  * @fn          RTC_IRQHandler
  *
- * @brief       RTC÷–∂œ¥¶¿Ì
+ * @brief       RTC‰∏≠Êñ≠Â§ÑÁêÜ
  *
  * @param       None.
  */
@@ -56,9 +56,8 @@ __INTERRUPT
 __HIGH_CODE
 void RTC_IRQHandler( void )
 {
-    uint32_t trig_time;
-
     R8_RTC_FLAG_CTRL =(RB_RTC_TMR_CLR|RB_RTC_TRIG_CLR);
+    RTCTigFlag = 1;
 }
 
 __HIGH_CODE
@@ -78,9 +77,29 @@ static void SYS_SetPendingIRQ(void)
 }
 
 /*******************************************************************************
+ * @fn          BLE_ClockConfig
+ *
+ * @brief       BLE_ClockConfig
+ *
+ * @param       conf.
+ */
+bleClockConfig_t BLE_ClockConfig(uint32_t lsifreq)
+{
+    bleClockConfig_t conf;
+
+    conf.ClockAccuracy = 2500;
+    conf.ClockFrequency = lsifreq;
+    conf.ClockMaxCount = RTC_MAX_COUNT;
+    conf.getClockValue = SYS_GetClockValue;
+    conf.SetPendingIRQ = SYS_SetPendingIRQ;
+
+    return conf;
+}
+
+/*******************************************************************************
  * @fn      HAL_Time0Init
  *
- * @brief   œµÕ≥∂® ±∆˜≥ı ºªØ
+ * @brief   Á≥ªÁªüÂÆöÊó∂Âô®ÂàùÂßãÂåñ
  *
  * @param   None.
  *
@@ -88,8 +107,8 @@ static void SYS_SetPendingIRQ(void)
  */
 void HAL_TimeInit(void)
 {
-    bleClockConfig_t conf;
-
+  bleClockConfig_t conf;
+  
   sys_safe_access_enable();
   R8_LSI_CONFIG |= RB_CLK_LSI_PON;
   sys_safe_access_disable();
@@ -100,16 +119,12 @@ void HAL_TimeInit(void)
 
   RTC_InitTime( 2021,1,28,0,0,0 );
 
-  conf.ClockAccuracy = 1000;
-  conf.ClockFrequency = lsiFrq;
-  conf.ClockMaxCount = RTC_MAX_COUNT;
-  conf.getClockValue = SYS_GetClockValue;
-  conf.SetPendingIRQ = SYS_SetPendingIRQ;
+  conf = BLE_ClockConfig(lsiFrq);
   TMOS_TimerInit( &conf );
 
   sys_safe_access_enable();
   __nop();__nop();
-  R8_RTC_MODE_CTRL  |= RB_RTC_TRIG_EN;  // ¥•∑¢ƒ£ Ω
+  R8_RTC_MODE_CTRL  |= RB_RTC_TRIG_EN;  // Ëß¶ÂèëÊ®°Âºè
   sys_safe_access_disable();
   PFIC_EnableIRQ(RTC_IRQn);
 }

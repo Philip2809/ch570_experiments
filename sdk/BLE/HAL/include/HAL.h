@@ -40,12 +40,12 @@ extern tmosTaskID halTaskID;
  */
 
 /**
- * @brief   Ó²¼ş³õÊ¼»¯
+ * @brief   ç¡¬ä»¶åˆå§‹åŒ–
  */
 extern void HAL_Init(void);
 
 /**
- * @brief   Ó²¼ş²ãÊÂÎñ´¦Àí
+ * @brief   ç¡¬ä»¶å±‚äº‹åŠ¡å¤„ç†
  *
  * @param   task_id - The TMOS assigned task ID.
  * @param   events - events to process.  This is a bit map and can
@@ -54,7 +54,7 @@ extern void HAL_Init(void);
 extern tmosEvents HAL_ProcessEvent(tmosTaskID task_id, tmosEvents events);
 
 /**
- * @brief   BLE ¿â³õÊ¼»¯
+ * @brief   BLE åº“åˆå§‹åŒ–
  */
 extern void CH57x_BLEInit(void);
 

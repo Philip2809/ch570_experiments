@@ -13,16 +13,16 @@
 #include "CH57x_common.h"
 
 /**
- * @brief  LSIÊ±ÖÓ£¨Hz£©
+ * @brief  LSIæ—¶é’Ÿï¼ˆHzï¼‰
  */
 uint32_t Freq_LSI = 0;
 
 /*********************************************************************
  * @fn      LClk_Cfg
  *
- * @brief   µÍÆµÊ±ÖÓµçÔ´ÅäÖÃ
+ * @brief   ä½é¢‘æ—¶é’Ÿç”µæºé…ç½®
  *
- * @param   s   - ÊÇ·ñ´ò¿ªµçÔ´
+ * @param   s   - æ˜¯å¦æ‰“å¼€ç”µæº
  *
  * @return  none
  */
@@ -47,7 +47,7 @@ void LClk_Cfg(FunctionalState s)
 /*********************************************************************
  * @fn      HSECFG_Current
  *
- * @brief   HSE¾§Ìå Æ«ÖÃµçÁ÷ÅäÖÃ
+ * @brief   HSEæ™¶ä½“ åç½®ç”µæµé…ç½®
  *
  * @param   c   - 75%,100%,125%,150%
  *
@@ -68,7 +68,7 @@ void HSECFG_Current(HSECurrentTypeDef c)
 /*********************************************************************
  * @fn      HSECFG_Capacitance
  *
- * @brief   HSE¾§Ìå ¸ºÔØµçÈİÅäÖÃ
+ * @brief   HSEæ™¶ä½“ è´Ÿè½½ç”µå®¹é…ç½®
  *
  * @param   c   - refer to HSECapTypeDef
  *
@@ -89,16 +89,20 @@ void HSECFG_Capacitance(HSECapTypeDef c)
 /*********************************************************************
  * @fn      RTC_InitClock
  *
- * @brief   ³õÊ¼»¯ RTCÊ±ÖÓ, ²¶»ñÖÜÆÚÊıÔ½¸ß,³õÊ¼»¯Ê±¼äÔ½³¤,Ê±ÖÓ¾«¶ÈÔ½¸ß
+ * @brief   åˆå§‹åŒ– RTCæ—¶é’Ÿ, æ•è·å‘¨æœŸæ•°è¶Šé«˜,åˆå§‹åŒ–æ—¶é—´è¶Šé•¿,æ—¶é’Ÿç²¾åº¦è¶Šé«˜
  *
  * @param   cnt     - the total number of cycles captured by the oscillator
  *
- * @return  RTCÊ±ÖÓ, 24~42KHz
+ * @return  RTCæ—¶é’Ÿ, 24~42KHz
  */
 uint32_t RTC_InitClock(RTC_OSCCntTypeDef cnt)
 {
     uint32_t count;
     uint32_t cyc;
+    uint32_t last_ov_cnt = 0;
+    uint32_t new_ov_cnt = 0;
+    uint32_t ov_cnt_ov_cnt = 0;
+
     if(cnt<Count_32)
     {
         cyc = 1<<cnt;
@@ -121,8 +125,16 @@ uint32_t RTC_InitClock(RTC_OSCCntTypeDef cnt)
     R8_OSC_CAL_CTRL = cnt;
     R8_OSC_CAL_CTRL |= RB_OSC_CNT_EN;
     sys_safe_access_disable();
-    while(!(R16_OSC_CAL_CNT&RB_OSC_CAL_IF));
-    count = ((uint32_t)R16_OSC_CAL_CNT&RB_OSC_CAL_CNT) + (uint32_t)R8_OSC_CAL_OV_CNT*16384;
+    while(!(R16_OSC_CAL_CNT&RB_OSC_CAL_IF))
+    {
+        new_ov_cnt = R8_OSC_CAL_OV_CNT;
+        if(new_ov_cnt<last_ov_cnt)
+        {
+            ov_cnt_ov_cnt++;
+        }
+        last_ov_cnt = new_ov_cnt;
+    }
+    count = ((uint32_t)R16_OSC_CAL_CNT&RB_OSC_CAL_CNT) + ((uint32_t)R8_OSC_CAL_OV_CNT+ov_cnt_ov_cnt*256)*16384;
     Freq_LSI = GetSysClock()/(count/cyc);
     return Freq_LSI;
 }
@@ -130,14 +142,14 @@ uint32_t RTC_InitClock(RTC_OSCCntTypeDef cnt)
 /*********************************************************************
  * @fn      RTCInitTime
  *
- * @brief   RTCÊ±ÖÓ³õÊ¼»¯µ±Ç°Ê±¼ä£¬×¢Òâ£ºÍòÄêÀú¼ÆÊı¸ù¾İÊµÊ±LSIÆµÂÊ¼ÆÊı£¬µ±LSIÆµÂÊÓĞ½Ï´ó²¨¶¯Ê±£¬»ñÈ¡µ½µÄÊ±ÖÓ»áÓĞÆ«²î¡£
+ * @brief   RTCæ—¶é’Ÿåˆå§‹åŒ–å½“å‰æ—¶é—´ï¼Œæ³¨æ„ï¼šä¸‡å¹´å†è®¡æ•°æ ¹æ®å®æ—¶LSIé¢‘ç‡è®¡æ•°ï¼Œå½“LSIé¢‘ç‡æœ‰è¾ƒå¤§æ³¢åŠ¨æ—¶ï¼Œè·å–åˆ°çš„æ—¶é’Ÿä¼šæœ‰åå·®ã€‚
  *
- * @param   y       - ÅäÖÃÄê£¬MAX_Y = BEGYEAR + 44
- * @param   mon     - ÅäÖÃÔÂ£¬MAX_MON = 12
- * @param   d       - ÅäÖÃÈÕ£¬MAX_D = 31
- * @param   h       - ÅäÖÃĞ¡Ê±£¬MAX_H = 23
- * @param   m       - ÅäÖÃ·ÖÖÓ£¬MAX_M = 59
- * @param   s       - ÅäÖÃÃë£¬MAX_S = 59
+ * @param   y       - é…ç½®å¹´ï¼ŒMAX_Y = BEGYEAR + 44
+ * @param   mon     - é…ç½®æœˆï¼ŒMAX_MON = 12
+ * @param   d       - é…ç½®æ—¥ï¼ŒMAX_D = 31
+ * @param   h       - é…ç½®å°æ—¶ï¼ŒMAX_H = 23
+ * @param   m       - é…ç½®åˆ†é’Ÿï¼ŒMAX_M = 59
+ * @param   s       - é…ç½®ç§’ï¼ŒMAX_S = 59
  *
  * @return  none
  */
@@ -171,29 +183,29 @@ void RTC_InitTime(uint16_t y, uint16_t mon, uint16_t d, uint16_t h, uint16_t m, 
     t = t << 16 | t32k;
 
     temp = day * Freq_LSI;
-    temp1 = temp % 32768; // ÌìÊıÓàÊı
-    temp = temp / 32768; // ÌìÊı
+    temp1 = temp % 32768; // å¤©æ•°ä½™æ•°
+    temp = temp / 32768; // å¤©æ•°
 
     temp2 = temp1 * 675; // temp1 / 32768 * 2831155200 / 65536
-    temp3 = temp2 % 512;   // ÌìÊıÓàÊı ×ª»»³É2sÎªµ¥Î»µÄÓàÊı
-    temp2 = temp2 / 512;   // ÌìÊıÓàÊı ×ª»»³É2sÎªµ¥Î»µÄÊı
+    temp3 = temp2 % 512;   // å¤©æ•°ä½™æ•° è½¬æ¢æˆ2sä¸ºå•ä½çš„ä½™æ•°
+    temp2 = temp2 / 512;   // å¤©æ•°ä½™æ•° è½¬æ¢æˆ2sä¸ºå•ä½çš„æ•°
 
-    temp1 = temp3 * 128; // 2sÎªµ¥Î»µÄÓàÊı ×ª»»³É ÖÜÆÚÊı  temp3 / 512 * 65536
+    temp1 = temp3 * 128; // 2sä¸ºå•ä½çš„ä½™æ•° è½¬æ¢æˆ å‘¨æœŸæ•°  temp3 / 512 * 65536
 
     tmp = sec2 * Freq_LSI;
-    tmp1 = tmp % 32768; // 2sÓàÊı
-    tmp = tmp / 32768; // 2sÊı
+    tmp1 = tmp % 32768; // 2sä½™æ•°
+    tmp = tmp / 32768; // 2sæ•°
 
-    tmp2 = tmp1 * 2 ; //  2sÎªµ¥Î»µÄÓàÊı ×ª»»³É ÖÜÆÚÊı  // tmp1 / 32768 * 65536
+    tmp2 = tmp1 * 2 ; //  2sä¸ºå•ä½çš„ä½™æ•° è½¬æ¢æˆ å‘¨æœŸæ•°  // tmp1 / 32768 * 65536
 
-    t32k = (t32k * Freq_LSI + 16384) / 32768; // ÖÜÆÚÊı
+    t32k = (t32k * Freq_LSI + 16384) / 32768; // å‘¨æœŸæ•°
 
-    t32k += tmp2 + temp1; // ×ÜÖÜÆÚÊı
-    tmp += (t32k/65536) + temp2; // ×Ü2sÊı
-    temp += (tmp/43200);    // ÌìÊı
+    t32k += tmp2 + temp1; // æ€»å‘¨æœŸæ•°
+    tmp += (t32k/65536) + temp2; // æ€»2sæ•°
+    temp += (tmp/43200);    // å¤©æ•°
 
-    t32k %= 65536;  // ÖÜÆÚÊı
-    tmp %= 43200;   // 2sÊı
+    t32k %= 65536;  // å‘¨æœŸæ•°
+    tmp %= 43200;   // 2sæ•°
 
     t = tmp;     // 64000
     t = t << 16 | t32k; // 1
@@ -228,14 +240,14 @@ void RTC_InitTime(uint16_t y, uint16_t mon, uint16_t d, uint16_t h, uint16_t m, 
 /*********************************************************************
  * @fn      RTC_GetTime
  *
- * @brief   »ñÈ¡µ±Ç°Ê±¼ä
+ * @brief   è·å–å½“å‰æ—¶é—´
  *
- * @param   py      - »ñÈ¡µ½µÄÄê£¬MAX_Y = BEGYEAR + 44
- * @param   pmon    - »ñÈ¡µ½µÄÔÂ£¬MAX_MON = 12
- * @param   pd      - »ñÈ¡µ½µÄÈÕ£¬MAX_D = 31
- * @param   ph      - »ñÈ¡µ½µÄĞ¡Ê±£¬MAX_H = 23
- * @param   pm      - »ñÈ¡µ½µÄ·ÖÖÓ£¬MAX_M = 59
- * @param   ps      - »ñÈ¡µ½µÄÃë£¬MAX_S = 59
+ * @param   py      - è·å–åˆ°çš„å¹´ï¼ŒMAX_Y = BEGYEAR + 44
+ * @param   pmon    - è·å–åˆ°çš„æœˆï¼ŒMAX_MON = 12
+ * @param   pd      - è·å–åˆ°çš„æ—¥ï¼ŒMAX_D = 31
+ * @param   ph      - è·å–åˆ°çš„å°æ—¶ï¼ŒMAX_H = 23
+ * @param   pm      - è·å–åˆ°çš„åˆ†é’Ÿï¼ŒMAX_M = 59
+ * @param   ps      - è·å–åˆ°çš„ç§’ï¼ŒMAX_S = 59
  *
  * @return  none
  */
@@ -251,30 +263,30 @@ void RTC_GetTime(uint16_t *py, uint16_t *pmon, uint16_t *pd, uint16_t *ph, uint1
     t32k = R16_RTC_CNT_LSI;
 
     temp = day * 32768;
-    temp1 = temp % Freq_LSI; // ÌìÊıÓàÊı
-    temp = temp / Freq_LSI; // ÌìÊı
+    temp1 = temp % Freq_LSI; // å¤©æ•°ä½™æ•°
+    temp = temp / Freq_LSI; // å¤©æ•°
 
     temp2 = temp1 * 43200; // temp1 / Freq_LSI * 43200
-    temp3 = temp2 % Freq_LSI;   // ÌìÊıÓàÊı ×ª»»³É2sÎªµ¥Î»µÄÓàÊı
-    temp2 = temp2 / Freq_LSI;   // ÌìÊıÓàÊı ×ª»»³É2sÎªµ¥Î»µÄÊı
+    temp3 = temp2 % Freq_LSI;   // å¤©æ•°ä½™æ•° è½¬æ¢æˆ2sä¸ºå•ä½çš„ä½™æ•°
+    temp2 = temp2 / Freq_LSI;   // å¤©æ•°ä½™æ•° è½¬æ¢æˆ2sä¸ºå•ä½çš„æ•°
 
-    temp1 = (temp3 * 65536 + Freq_LSI/2 ) / Freq_LSI; // 2sÎªµ¥Î»µÄÓàÊı ×ª»»³É ÖÜÆÚÊı  temp3 / Freq_LSI * 65536
+    temp1 = (temp3 * 65536 + Freq_LSI/2 ) / Freq_LSI; // 2sä¸ºå•ä½çš„ä½™æ•° è½¬æ¢æˆ å‘¨æœŸæ•°  temp3 / Freq_LSI * 65536
 
     tmp = sec2 * 32768;
-    tmp1 = tmp % Freq_LSI; // 2sÓàÊı           5376
-    tmp = tmp / Freq_LSI; // 2sÊı                 1799
+    tmp1 = tmp % Freq_LSI; // 2sä½™æ•°           5376
+    tmp = tmp / Freq_LSI; // 2sæ•°                 1799
 
-    tmp2 = (tmp1 * 65536 + Freq_LSI/2 ) / Freq_LSI; //  2sÎªµ¥Î»µÄÓàÊı ×ª»»³É ÖÜÆÚÊı  // tmp1 / Freq_LSI * 65536  11010
+    tmp2 = (tmp1 * 65536 + Freq_LSI/2 ) / Freq_LSI; //  2sä¸ºå•ä½çš„ä½™æ•° è½¬æ¢æˆ å‘¨æœŸæ•°  // tmp1 / Freq_LSI * 65536  11010
 
-    t32k = (t32k * 32768 + Freq_LSI/2 ) / Freq_LSI; // ÖÜÆÚÊı       54525
+    t32k = (t32k * 32768 + Freq_LSI/2 ) / Freq_LSI; // å‘¨æœŸæ•°       54525
 
 
-    t32k += tmp2 + temp1; // ×ÜÖÜÆÚÊı
-    tmp += (t32k/65536) + temp2; // ×Ü2sÊı
-    temp += (tmp/43200);    // ÌìÊı
+    t32k += tmp2 + temp1; // æ€»å‘¨æœŸæ•°
+    tmp += (t32k/65536) + temp2; // æ€»2sæ•°
+    temp += (tmp/43200);    // å¤©æ•°
 
-    t32k %= 65536;  // ÖÜÆÚÊı
-    tmp %= 43200;   // 2sÊı
+    t32k %= 65536;  // å‘¨æœŸæ•°
+    tmp %= 43200;   // 2sæ•°
 
 
     t = tmp * 2 + ((t32k < 0x8000) ? 0 : 1);
@@ -302,9 +314,9 @@ void RTC_GetTime(uint16_t *py, uint16_t *pmon, uint16_t *pd, uint16_t *ph, uint1
 /*********************************************************************
  * @fn      RTC_SetCycleLSI
  *
- * @brief   »ùÓÚLSIÊ±ÖÓ£¬ÅäÖÃµ±Ç°RTC ÖÜÆÚÊı
+ * @brief   åŸºäºLSIæ—¶é’Ÿï¼Œé…ç½®å½“å‰RTC å‘¨æœŸæ•°
  *
- * @param   cyc     - ÅäÖÃÖÜÆÚ¼ÆÊı³õÖµ£¬MAX_CYC = 0xA8BFFFFF = 2831155199
+ * @param   cyc     - é…ç½®å‘¨æœŸè®¡æ•°åˆå€¼ï¼ŒMAX_CYC = 0xA8BFFFFF = 2831155199
  *
  * @return  none
  */
@@ -326,11 +338,11 @@ void RTC_SetCycleLSI(uint32_t cyc)
 /*********************************************************************
  * @fn      RTC_GetCycleLSI
  *
- * @brief   »ùÓÚLSIÊ±ÖÓ£¬»ñÈ¡µ±Ç°RTC ÖÜÆÚÊı
+ * @brief   åŸºäºLSIæ—¶é’Ÿï¼Œè·å–å½“å‰RTC å‘¨æœŸæ•°
  *
  * @param   none
  *
- * @return  µ±Ç°ÖÜÆÚÊı£¬MAX_CYC = 0xA8BFFFFF = 2831155199
+ * @return  å½“å‰å‘¨æœŸæ•°ï¼ŒMAX_CYC = 0xA8BFFFFF = 2831155199
  */
 uint32_t RTC_GetCycleLSI(void)
 {
@@ -347,7 +359,7 @@ uint32_t RTC_GetCycleLSI(void)
 /*********************************************************************
  * @fn      RTC_TMRFunCfg
  *
- * @brief   RTC¶¨Ê±Ä£Ê½ÅäÖÃ£¨×¢Òâ¶¨Ê±»ù×¼¹Ì¶¨Îª32768Hz£©
+ * @brief   RTCå®šæ—¶æ¨¡å¼é…ç½®ï¼ˆæ³¨æ„å®šæ—¶åŸºå‡†å›ºå®šä¸º32768Hzï¼‰
  *
  * @param   t   - refer to RTC_TMRCycTypeDef
  *
@@ -366,9 +378,9 @@ void RTC_TMRFunCfg(RTC_TMRCycTypeDef t)
 /*********************************************************************
  * @fn      RTC_TRIGFunCfg
  *
- * @brief   RTCÊ±¼ä´¥·¢Ä£Ê½ÅäÖÃ
+ * @brief   RTCæ—¶é—´è§¦å‘æ¨¡å¼é…ç½®
  *
- * @param   cyc - Ïà¶Ôµ±Ç°Ê±¼äµÄ´¥·¢¼ä¸ôÊ±¼ä£¬»ùÓÚLSIÊ±ÖÓÖÜÆÚÊı
+ * @param   cyc - ç›¸å¯¹å½“å‰æ—¶é—´çš„è§¦å‘é—´éš”æ—¶é—´ï¼ŒåŸºäºLSIæ—¶é’Ÿå‘¨æœŸæ•°
  *
  * @return  none
  */
@@ -391,9 +403,9 @@ void RTC_TRIGFunCfg(uint32_t cyc)
 /*********************************************************************
  * @fn      RTC_ModeFunDisable
  *
- * @brief   RTC Ä£Ê½¹¦ÄÜ¹Ø±Õ
+ * @brief   RTC æ¨¡å¼åŠŸèƒ½å…³é—­
  *
- * @param   m   - ĞèÒª¹Ø±ÕµÄµ±Ç°Ä£Ê½
+ * @param   m   - éœ€è¦å…³é—­çš„å½“å‰æ¨¡å¼
  *
  * @return  none
  */
@@ -418,11 +430,11 @@ void RTC_ModeFunDisable(RTC_MODETypeDef m)
 /*********************************************************************
  * @fn      RTC_GetITFlag
  *
- * @brief   »ñÈ¡RTCÖĞ¶Ï±êÖ¾
+ * @brief   è·å–RTCä¸­æ–­æ ‡å¿—
  *
  * @param   f   - refer to RTC_EVENTTypeDef
  *
- * @return  ÖĞ¶Ï±êÖ¾×´Ì¬
+ * @return  ä¸­æ–­æ ‡å¿—çŠ¶æ€
  */
 uint8_t RTC_GetITFlag(RTC_EVENTTypeDef f)
 {
@@ -439,7 +451,7 @@ uint8_t RTC_GetITFlag(RTC_EVENTTypeDef f)
 /*********************************************************************
  * @fn      RTC_ClearITFlag
  *
- * @brief   Çå³ıRTCÖĞ¶Ï±êÖ¾
+ * @brief   æ¸…é™¤RTCä¸­æ–­æ ‡å¿—
  *
  * @param   f   - refer to RTC_EVENTTypeDef
  *

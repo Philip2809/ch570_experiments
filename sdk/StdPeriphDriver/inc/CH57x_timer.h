@@ -22,27 +22,27 @@ extern "C" {
 /**
  * @brief  TMR interrupt bit define
  */
-#define TMR_IT_CYC_END     0x01  // ÖÜÆÚ½áÊø±êÖ¾£º²¶×½-³¬Ê±£¬¶¨Ê±-ÖÜÆÚ½áÊø£¬PWM-ÖÜÆÚ½áÊø
-#define TMR_IT_DATA_ACT    0x02  // Êı¾İÓĞĞ§±êÖ¾£º²¶×½-ĞÂÊı¾İ£¬PWM-ÓĞĞ§µçÆ½½áÊø
-#define TMR_IT_FIFO_HF     0x04  // FIFO Ê¹ÓÃ¹ı°ë£º²¶×½- FIFO>=4£¬ PWM- FIFO<4
-#define TMR_IT_DMA_END     0x08  // DMA ½áÊø£¬Ö§³ÖTMR-TMR3
-#define TMR_IT_FIFO_OV     0x10  // FIFO Òç³ö£º²¶×½- FIFOÂú£¬ PWM- FIFO¿Õ
+#define TMR_IT_CYC_END     0x01  // å‘¨æœŸç»“æŸæ ‡å¿—ï¼šæ•æ‰-è¶…æ—¶ï¼Œå®šæ—¶-å‘¨æœŸç»“æŸï¼ŒPWM-å‘¨æœŸç»“æŸ
+#define TMR_IT_DATA_ACT    0x02  // æ•°æ®æœ‰æ•ˆæ ‡å¿—ï¼šæ•æ‰-æ–°æ•°æ®ï¼ŒPWM-æœ‰æ•ˆç”µå¹³ç»“æŸ
+#define TMR_IT_FIFO_HF     0x04  // FIFO ä½¿ç”¨è¿‡åŠï¼šæ•æ‰- FIFO>=4ï¼Œ PWM- FIFO<4
+#define TMR_IT_DMA_END     0x08  // DMA ç»“æŸï¼Œæ”¯æŒTMR-TMR3
+#define TMR_IT_FIFO_OV     0x10  // FIFO æº¢å‡ºï¼šæ•æ‰- FIFOæ»¡ï¼Œ PWM- FIFOç©º
 
 /**
  * @brief  ENC interrupt bit define
  */
-#define RB_IE_DIR_INC      0x01  // Ç°½øÖĞ¶ÏÊ¹ÄÜ
-#define RB_IE_DIR_DEC      0x02  // ºóÍËÖĞ¶ÏÊ¹ÄÜ
+#define RB_IE_DIR_INC      0x01  // å‰è¿›ä¸­æ–­ä½¿èƒ½
+#define RB_IE_DIR_DEC      0x02  // åé€€ä¸­æ–­ä½¿èƒ½
 
 /**
  * @brief  Configuration PWM effective level repeat times
  */
 typedef enum
 {
-    PWM_Times_1 = 0, // PWM ÓĞĞ§Êä³öÖØ¸´1´ÎÊı
-    PWM_Times_4,     // PWM ÓĞĞ§Êä³öÖØ¸´4´ÎÊı
-    PWM_Times_8,     // PWM ÓĞĞ§Êä³öÖØ¸´8´ÎÊı
-    PWM_Times_16,    // PWM ÓĞĞ§Êä³öÖØ¸´16´ÎÊı
+    PWM_Times_1 = 0, // PWM æœ‰æ•ˆè¾“å‡ºé‡å¤1æ¬¡æ•°
+    PWM_Times_4,     // PWM æœ‰æ•ˆè¾“å‡ºé‡å¤4æ¬¡æ•°
+    PWM_Times_8,     // PWM æœ‰æ•ˆè¾“å‡ºé‡å¤8æ¬¡æ•°
+    PWM_Times_16,    // PWM æœ‰æ•ˆè¾“å‡ºé‡å¤16æ¬¡æ•°
 } PWM_RepeatTsTypeDef;
 
 /**
@@ -50,10 +50,10 @@ typedef enum
  */
 typedef enum
 {
-    CAP_NULL = 0,         // ²»²¶×½ & ²»¼ÆÊı
-    Edge_To_Edge,         // ÈÎÒâ±ßÑØÖ®¼ä  &  ¼ÆÊıÈÎÒâ±ßÑØ
-    FallEdge_To_FallEdge, // ÏÂ½µÑØµ½ÏÂ½µÑØ  & ¼ÆÊıÏÂ½µÑØ
-    RiseEdge_To_RiseEdge, // ÉÏÉıÑØµ½ÉÏÉıÑØ  &  ¼ÆÊıÉÏÉıÑØ
+    CAP_NULL = 0,         // ä¸æ•æ‰ & ä¸è®¡æ•°
+    Edge_To_Edge,         // ä»»æ„è¾¹æ²¿ä¹‹é—´  &  è®¡æ•°ä»»æ„è¾¹æ²¿
+    FallEdge_To_FallEdge, // ä¸‹é™æ²¿åˆ°ä¸‹é™æ²¿  & è®¡æ•°ä¸‹é™æ²¿
+    RiseEdge_To_RiseEdge, // ä¸Šå‡æ²¿åˆ°ä¸Šå‡æ²¿  &  è®¡æ•°ä¸Šå‡æ²¿
 } CapModeTypeDef;
 
 /**
@@ -61,8 +61,8 @@ typedef enum
  */
 typedef enum
 {
-    Mode_Single = 0, // µ¥´ÎÄ£Ê½
-    Mode_LOOP,       // Ñ­»·Ä£Ê½
+    Mode_Single = 0, // å•æ¬¡æ¨¡å¼
+    Mode_LOOP,       // å¾ªç¯æ¨¡å¼
 } DMAModeTypeDef;
 
 /**
@@ -70,49 +70,49 @@ typedef enum
  */
 typedef enum
 {
-    Mode_IDLE = 0,   // IDLEÄ£Ê½
-    Mode_T2 ,        // T2±ßÑØ¼ÆÊıÄ£Ê½
-    Mode_T1 ,        // T1±ßÑØ¼ÆÊıÄ£Ê½
-    Mode_T1T2 ,      // T1ºÍT2±ßÑØ¼ÆÊıÄ£Ê½
+    Mode_IDLE = 0,   // IDLEæ¨¡å¼
+    Mode_T2 ,        // T2è¾¹æ²¿è®¡æ•°æ¨¡å¼
+    Mode_T1 ,        // T1è¾¹æ²¿è®¡æ•°æ¨¡å¼
+    Mode_T1T2 ,      // T1å’ŒT2è¾¹æ²¿è®¡æ•°æ¨¡å¼
 } ENCModeTypeDef;
 
 /**
- * @brief   ¶¨Ê±¹¦ÄÜ³õÊ¼»¯
+ * @brief   å®šæ—¶åŠŸèƒ½åˆå§‹åŒ–
  *
- * @param   t       - ¶¨Ê±Ê±¼ä£¬»ùÓÚµ±Ç°ÏµÍ³Ê±ÖÓTsys, ×î³¤¶¨Ê±ÖÜÆÚ 67108864
+ * @param   t       - å®šæ—¶æ—¶é—´ï¼ŒåŸºäºå½“å‰ç³»ç»Ÿæ—¶é’ŸTsys, æœ€é•¿å®šæ—¶å‘¨æœŸ 67108864
  */
 void TMR_TimerInit(uint32_t t);
 
 /**
- * @brief   ±ßÑØ¼ÆÊı¹¦ÄÜ³õÊ¼»¯
+ * @brief   è¾¹æ²¿è®¡æ•°åŠŸèƒ½åˆå§‹åŒ–
  *
- * @param   cap     - ²É¼¯¼ÆÊıÀàĞÍ
+ * @param   cap     - é‡‡é›†è®¡æ•°ç±»å‹
  */
 void TMR_EXTSingleCounterInit(CapModeTypeDef cap);
 
 /**
- * @brief   ÉèÖÃ¼ÆÊıÍ³¼ÆÒç³ö´óĞ¡£¬×î´ó67108863
+ * @brief   è®¾ç½®è®¡æ•°ç»Ÿè®¡æº¢å‡ºå¤§å°ï¼Œæœ€å¤§67108863
  *
- * @param   cyc     - ¼ÆÊıÍ³¼ÆÒç³ö´óĞ¡
+ * @param   cyc     - è®¡æ•°ç»Ÿè®¡æº¢å‡ºå¤§å°
  */
 #define TMR_CountOverflowCfg(cyc)    (R32_TMR_CNT_END = (cyc + 2))
 
 /**
- * @brief   »ñÈ¡µ±Ç°¼ÆÊıÖµ£¬×î´ó67108863
+ * @brief   è·å–å½“å‰è®¡æ•°å€¼ï¼Œæœ€å¤§67108863
  *
- * @return  µ±Ç°¼ÆÊıÖµ
+ * @return  å½“å‰è®¡æ•°å€¼
  */
 #define TMR_GetCurrentCount()        R32_TMR_COUNT
 
 /**
- * @brief   PWM0 Í¨µÀÊä³ö²¨ĞÎÖÜÆÚÅäÖÃ, ×î´ó67108863
+ * @brief   PWM0 é€šé“è¾“å‡ºæ³¢å½¢å‘¨æœŸé…ç½®, æœ€å¤§67108863
  *
- * @param   cyc     - Êä³ö²¨ĞÎÖÜÆÚ
+ * @param   cyc     - è¾“å‡ºæ³¢å½¢å‘¨æœŸ
  */
 #define TMR_PWMCycleCfg(cyc)         (R32_TMR_CNT_END = cyc)
 
 /**
- * @brief   PWM Êä³ö³õÊ¼»¯
+ * @brief   PWM è¾“å‡ºåˆå§‹åŒ–
  *
  * @param   pr      - select wave polar, refer to PWMX_PolarTypeDef
  * @param   ts      - set pwm repeat times, refer to PWM_RepeatTsTypeDef
@@ -120,137 +120,137 @@ void TMR_EXTSingleCounterInit(CapModeTypeDef cap);
 void TMR_PWMInit(PWMX_PolarTypeDef pr, PWM_RepeatTsTypeDef ts);
 
 /**
- * @brief   PWM0 ÓĞĞ§Êı¾İÂö¿í, ×î´ó67108864
+ * @brief   PWM0 æœ‰æ•ˆæ•°æ®è„‰å®½, æœ€å¤§67108864
  *
- * @param   d       - ÓĞĞ§Êı¾İÂö¿í
+ * @param   d       - æœ‰æ•ˆæ•°æ®è„‰å®½
  */
 #define TMR_PWMActDataWidth(d)    (R32_TMR_FIFO = d)
 
 /**
- * @brief   CAP0 ²¶×½µçÆ½³¬Ê±ÅäÖÃ, ×î´ó33554432
+ * @brief   CAP0 æ•æ‰ç”µå¹³è¶…æ—¶é…ç½®, æœ€å¤§33554432
  *
- * @param   cyc     - ²¶×½µçÆ½³¬Ê±
+ * @param   cyc     - æ•æ‰ç”µå¹³è¶…æ—¶
  */
 #define TMR_CAPTimeoutCfg(cyc)    (R32_TMR_CNT_END = cyc)
 
 /**
- * @brief   Íâ²¿ĞÅºÅ²¶×½¹¦ÄÜ³õÊ¼»¯
+ * @brief   å¤–éƒ¨ä¿¡å·æ•æ‰åŠŸèƒ½åˆå§‹åŒ–
  *
  * @param   cap     - select capture mode, refer to CapModeTypeDef
  */
 void TMR_CapInit(CapModeTypeDef cap);
 
 /**
- * @brief   »ñÈ¡Âö³åÊı¾İ
+ * @brief   è·å–è„‰å†²æ•°æ®
  *
- * @return  Âö³åÊı¾İ
+ * @return  è„‰å†²æ•°æ®
  */
 #define TMR_CAPGetData()        R32_TMR_FIFO
 
 /**
- * @brief   »ñÈ¡µ±Ç°ÒÑ²¶»ñÊı¾İ¸öÊı
+ * @brief   è·å–å½“å‰å·²æ•è·æ•°æ®ä¸ªæ•°
  *
- * @return  µ±Ç°ÒÑ²¶»ñÊı¾İ¸öÊı
+ * @return  å½“å‰å·²æ•è·æ•°æ®ä¸ªæ•°
  */
 #define TMR_CAPDataCounter()    R8_TMR_FIFO_COUNT
 
 /**
- * @brief   ÅäÖÃDMA¹¦ÄÜ
+ * @brief   é…ç½®DMAåŠŸèƒ½
  *
- * @param   s           - ÊÇ·ñ´ò¿ªDMA¹¦ÄÜ
- * @param   startAddr   - DMA ÆğÊ¼µØÖ·
- * @param   endAddr     - DMA ½áÊøµØÖ·
- * @param   m           - ÅäÖÃDMAÄ£Ê½
+ * @param   s           - æ˜¯å¦æ‰“å¼€DMAåŠŸèƒ½
+ * @param   startAddr   - DMA èµ·å§‹åœ°å€
+ * @param   endAddr     - DMA ç»“æŸåœ°å€
+ * @param   m           - é…ç½®DMAæ¨¡å¼
  */
 void TMR_DMACfg(uint8_t s, uint32_t startAddr, uint32_t endAddr, DMAModeTypeDef m);
 
 /**
- * @brief   ÅäÖÃENC¹¦ÄÜ
+ * @brief   é…ç½®ENCåŠŸèƒ½
  *
- * @param   s           - ÊÇ·ñ¿ªÆô±àÂëÆ÷¹¦ÄÜ
- * @param   encReg      - ±àÂëÆ÷Ä£Ê½ÖÕÖµ(×î´óÖµ0xFFFF)
- * @param   m           - ÅäÖÃENCÄ£Ê½
+ * @param   s           - æ˜¯å¦å¼€å¯ç¼–ç å™¨åŠŸèƒ½
+ * @param   encReg      - ç¼–ç å™¨æ¨¡å¼ç»ˆå€¼(æœ€å¤§å€¼0xFFFF)
+ * @param   m           - é…ç½®ENCæ¨¡å¼
  *
  * @return  none
  */
 void ENC_Config(uint8_t s, uint32_t encReg, ENCModeTypeDef m);
 
 /**
- * @brief   ¹Ø±Õ TMR PWMÊä³ö
+ * @brief   å…³é—­ TMR PWMè¾“å‡º
  */
 #define TMR_PWMDisable()           (R8_TMR_CTRL_MOD &= ~RB_TMR_OUT_EN)
 
 /**
- * @brief   ¿ªÆô TMR PWMÊä³ö
+ * @brief   å¼€å¯ TMR PWMè¾“å‡º
  */
 #define TMR_PWMEnable()           (R8_TMR_CTRL_MOD |= RB_TMR_OUT_EN)
 
 /**
- * @brief   ¹Ø±Õ TMR
+ * @brief   å…³é—­ TMR
  */
 #define TMR_Disable()           (R8_TMR_CTRL_MOD &= ~RB_TMR_COUNT_EN)
 
 /**
- * @brief   ¿ªÆô TMR
+ * @brief   å¼€å¯ TMR
  */
 #define TMR_Enable()            (R8_TMR_CTRL_MOD |= RB_TMR_COUNT_EN)
 
 /**
- * @brief   TMRÖĞ¶ÏÅäÖÃ
+ * @brief   TMRä¸­æ–­é…ç½®
  *
- * @param   s       - Ê¹ÄÜ/¹Ø±Õ
+ * @param   s       - ä½¿èƒ½/å…³é—­
  * @param   f       - refer to TMR interrupt bit define
  */
 #define TMR_ITCfg(s, f)         ((s) ? (R8_TMR_INTER_EN |= f) : (R8_TMR_INTER_EN &= ~f))
 
 /**
- * @brief   Çå³ıTMRÖĞ¶Ï±êÖ¾
+ * @brief   æ¸…é™¤TMRä¸­æ–­æ ‡å¿—
  *
  * @param   f       - refer to TMR interrupt bit define
  */
 #define TMR_ClearITFlag(f)      (R8_TMR_INT_FLAG = f)
 
 /**
- * @brief   ²éÑ¯ÖĞ¶Ï±êÖ¾×´Ì¬
+ * @brief   æŸ¥è¯¢ä¸­æ–­æ ‡å¿—çŠ¶æ€
  *
  * @param   f       - refer to TMR interrupt bit define
  */
 #define TMR_GetITFlag(f)        (R8_TMR_INT_FLAG & f)
 
 /**
- * @brief   »ñÈ¡±àÂëÆ÷µ±Ç°·½Ïò
+ * @brief   è·å–ç¼–ç å™¨å½“å‰æ–¹å‘
  *
- * @return  ·½ÏòÖµ  0:Ç°½ø  1:ºóÍË
+ * @return  æ–¹å‘å€¼  0:å‰è¿›  1:åé€€
  */
 #define ENC_GetCurrentDir       (R8_ENC_REG_CTRL>>5 & 0x01)
 
 /**
- * @brief   »ñÈ¡±àÂëÆ÷µ±Ç°¼ÆÊıÖµ
+ * @brief   è·å–ç¼–ç å™¨å½“å‰è®¡æ•°å€¼
  */
 #define ENC_GetCurrentCount      R32_ENC_REG_CCNT
 
 /**
- * @brief   ±àÂëÆ÷Ä£Ê½¶Á¼ÆÊı²¢Çå0
+ * @brief   ç¼–ç å™¨æ¨¡å¼è¯»è®¡æ•°å¹¶æ¸…0
  */
 #define ENC_GetCountandReset()  R8_ENC_REG_CTRL |= RB_RD_CLR_EN
 
 /**
- * @brief   ENCÖĞ¶ÏÅäÖÃ
+ * @brief   ENCä¸­æ–­é…ç½®
  *
- * @param   s       - Ê¹ÄÜ/¹Ø±Õ
+ * @param   s       - ä½¿èƒ½/å…³é—­
  * @param   f       - refer to ENC interrupt bit define
  */
 #define ENC_ITCfg(s, f)         ((s) ? (R8_ENC_INTER_EN |= f) : (R8_ENC_INTER_EN &= ~f))
 
 /**
- * @brief   Çå³ıENCÖĞ¶Ï±êÖ¾
+ * @brief   æ¸…é™¤ENCä¸­æ–­æ ‡å¿—
  *
  * @param   f       - refer to ENC interrupt bit define
  */
 #define ENC_ClearITFlag(f)      (R8_ENC_INT_FLAG = f)
 
 /**
- * @brief   ²éÑ¯ÖĞ¶Ï±êÖ¾×´Ì¬
+ * @brief   æŸ¥è¯¢ä¸­æ–­æ ‡å¿—çŠ¶æ€
  *
  * @param   f       - refer to ENC interrupt bit define
  */

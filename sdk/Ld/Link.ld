@@ -38,8 +38,6 @@ SECTIONS
         *(.vector);
         *(.highcode);
         *(.highcode.*);
-        *(.highcode_lp);
-        *(.highcode_lp.*); 
 		. = ALIGN(4); 
         PROVIDE(_highcode_vma_end = .);
     } >RAM AT>FLASH

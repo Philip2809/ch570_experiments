@@ -3,7 +3,7 @@
  * Author             : WCH
  * Version            : V1.2
  * Date               : 2022/01/18
- * Description        : Ë¯ÃßÅäÖÃ¼°Æä³õÊ¼»¯
+ * Description        : ç¡çœ é…ç½®åŠå…¶åˆå§‹åŒ–
  *********************************************************************************
  * Copyright (c) 2021 Nanjing Qinheng Microelectronics Co., Ltd.
  * Attention: This software (modified or not) and binary are used for 
@@ -11,15 +11,17 @@
  *******************************************************************************/
 
 /******************************************************************************/
-/* Í·ÎÄ¼ş°üº¬ */
+/* å¤´æ–‡ä»¶åŒ…å« */
 #include "HAL.h"
+
+uint16_t LSIWakeup_MaxTime;
 
 /*******************************************************************************
  * @fn          CH57x_LowPower
  *
- * @brief       Æô¶¯Ë¯Ãß
+ * @brief       å¯åŠ¨ç¡çœ 
  *
- * @param       time  - »½ĞÑµÄÊ±¼äµã£¨RTC¾ø¶ÔÖµ£©
+ * @param       time  - å”¤é†’çš„æ—¶é—´ç‚¹ï¼ˆRTCç»å¯¹å€¼ï¼‰
  *
  * @return      state.
  */
@@ -30,23 +32,23 @@ uint32_t CH57x_LowPower(uint32_t time)
     uint32_t time_tign, time_sleep, time_curr;
     unsigned long irq_status;
 
-    // ÌáÇ°»½ĞÑ
-    if (time <= WAKE_UP_RTC_MAX_TIME) {
-        time_tign = time + (RTC_MAX_COUNT - WAKE_UP_RTC_MAX_TIME);
+    // æå‰å”¤é†’
+    if (time <= LSIWakeup_MaxTime) {
+        time_tign = time + (RTC_MAX_COUNT - LSIWakeup_MaxTime);
     } else {
-        time_tign = time - WAKE_UP_RTC_MAX_TIME;
+        time_tign = time - LSIWakeup_MaxTime;
     }
 
     SYS_DisableAllIrq(&irq_status);
     time_curr = RTC_GetCycleLSI();
-    // ¼ì²âË¯ÃßÊ±¼ä
+    // æ£€æµ‹ç¡çœ æ—¶é—´
     if (time_tign < time_curr) {
         time_sleep = time_tign + (RTC_MAX_COUNT - time_curr);
     } else {
         time_sleep = time_tign - time_curr;
     }
 
-    // ÈôË¯ÃßÊ±¼äĞ¡ÓÚ×îĞ¡Ë¯ÃßÊ±¼ä»ò´óÓÚ×î´óË¯ÃßÊ±¼ä£¬Ôò²»Ë¯Ãß
+    // è‹¥ç¡çœ æ—¶é—´å°äºæœ€å°ç¡çœ æ—¶é—´æˆ–å¤§äºæœ€å¤§ç¡çœ æ—¶é—´ï¼Œåˆ™ä¸ç¡çœ 
     if ((time_sleep < SLEEP_RTC_MIN_TIME) || 
         (time_sleep > SLEEP_RTC_MAX_TIME)) {
         SYS_RecoverIrq(irq_status);
@@ -55,17 +57,17 @@ uint32_t CH57x_LowPower(uint32_t time)
 
     RTC_SetTignTime(time_tign);
     SYS_RecoverIrq(irq_status);
-#if(DEBUG == Debug_UART0) // Ê¹ÓÃÆäËû´®¿ÚÊä³ö´òÓ¡ĞÅÏ¢ĞèÒªĞŞ¸ÄÕâĞĞ´úÂë
+#if(DEBUG == Debug_UART0) // ä½¿ç”¨å…¶ä»–ä¸²å£è¾“å‡ºæ‰“å°ä¿¡æ¯éœ€è¦ä¿®æ”¹è¿™è¡Œä»£ç 
     while((R8_UART_LSR & RB_LSR_TX_ALL_EMP) == 0)
     {
         __nop();
     }
 #endif
-    // LOW POWER-sleepÄ£Ê½
+    // LOW POWER-sleepæ¨¡å¼
     if(!RTCTigFlag)
     {
-        LowPower_Sleep(RB_PWR_RAM12K | RB_PWR_EXTEND | RB_PWR_XROM );
-        HSECFG_Current(HSE_RCur_100); // ½µÎª¶î¶¨µçÁ÷(µÍ¹¦ºÄº¯ÊıÖĞÌáÉıÁËHSEÆ«ÖÃµçÁ÷)
+        LowPower_Sleep(RB_PWR_RAM12K | RB_PWR_EXTEND | RB_XT_PRE_EN );
+        HSECFG_Current(HSE_RCur_100); // é™ä¸ºé¢å®šç”µæµ(ä½åŠŸè€—å‡½æ•°ä¸­æå‡äº†HSEåç½®ç”µæµ)
         return 0;
     }
 #endif
@@ -73,9 +75,27 @@ uint32_t CH57x_LowPower(uint32_t time)
 }
 
 /*******************************************************************************
+ * @fn          GET_WakeUpLSIMaxTime
+ *
+ * @brief       è·å–å½“å‰æå‰å”¤é†’æ—¶é—´
+ *
+ * @param       none
+ */
+uint16_t GET_WakeUpLSIMaxTime(void)
+{
+    uint16_t pre_time;
+
+    pre_time = RTC_TO_US(45)+200;
+    pre_time = pre_time > 1600 ? pre_time:1600;
+    pre_time = US_TO_RTC(pre_time);
+
+    return pre_time;
+}
+
+/*******************************************************************************
  * @fn      HAL_SleepInit
  *
- * @brief   ÅäÖÃË¯Ãß»½ĞÑµÄ·½Ê½   - RTC»½ĞÑ£¬´¥·¢Ä£Ê½
+ * @brief   é…ç½®ç¡çœ å”¤é†’çš„æ–¹å¼   - RTCå”¤é†’ï¼Œè§¦å‘æ¨¡å¼
  *
  * @param   None.
  *
@@ -85,11 +105,13 @@ void HAL_SleepInit(void)
 {
 #if(defined(HAL_SLEEP)) && (HAL_SLEEP == TRUE)
     sys_safe_access_enable();
-    R8_SLP_WAKE_CTRL |= RB_SLP_RTC_WAKE; // RTC»½ĞÑ
+    R8_SLP_WAKE_CTRL |= RB_SLP_RTC_WAKE; // RTCå”¤é†’
     sys_safe_access_disable();
     sys_safe_access_enable();
-    R8_RTC_MODE_CTRL |= RB_RTC_TRIG_EN;  // ´¥·¢Ä£Ê½
+    R8_RTC_MODE_CTRL |= RB_RTC_TRIG_EN;  // è§¦å‘æ¨¡å¼
     sys_safe_access_disable();
     PFIC_EnableIRQ(RTC_IRQn);
+    LSIWakeup_MaxTime = GET_WakeUpLSIMaxTime();
+//    PRINT("Pre_time %d\n",LSIWakeup_MaxTime);
 #endif
 }

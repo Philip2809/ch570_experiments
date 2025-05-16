@@ -15,7 +15,7 @@
 /*********************************************************************
  * @fn      PWMX_CycleCfg
  *
- * @brief   PWM 8Î»ÖÜÆÚÅäÖÃ
+ * @brief   PWM 8ä½å‘¨æœŸé…ç½®
  *
  * @param   cyc     - refer to PWMX_CycleTypeDef
  *
@@ -57,9 +57,9 @@ void PWMX_CycleCfg(PWMX_CycleTypeDef cyc)
 /*********************************************************************
  * @fn      PWMX_16bit_CycleCfg
  *
- * @brief   PWM 16Î»ÖÜÆÚÅäÖÃ
+ * @brief   PWM 16ä½å‘¨æœŸé…ç½®
  *
- * @param   cyc     - 16Î»ÖÜÆÚ
+ * @param   cyc     - 16ä½å‘¨æœŸ
  *
  * @return  none
  */
@@ -78,7 +78,7 @@ void PWMX_16bit_CycleCfg(uint8_t ch, uint16_t cyc)
 /*********************************************************************
  * @fn      PWMX_16bit_ACTOUT
  *
- * @brief   PWM 16Î»Êä³ö²¨ĞÎÅäÖÃ
+ * @brief   PWM 16ä½è¾“å‡ºæ³¢å½¢é…ç½®
  *
  * @param   ch      - select channel of pwm, refer to channel of PWM define
  * @param   da      - effective pulse width
@@ -119,7 +119,7 @@ void PWMX_16bit_ACTOUT(uint8_t ch, uint16_t da, PWMX_PolarTypeDef pr, Functional
 /*********************************************************************
  * @fn      PWMX_ACTOUT
  *
- * @brief   PWM 8Î»Êä³ö²¨ĞÎÅäÖÃ
+ * @brief   PWM 8ä½è¾“å‡ºæ³¢å½¢é…ç½®
  *
  * @param   ch      - select channel of pwm, refer to channel of PWM define
  * @param   da      - effective pulse width
@@ -166,10 +166,10 @@ void PWMX_ACTOUT(uint8_t ch, uint8_t da, PWMX_PolarTypeDef pr, FunctionalState s
 /*********************************************************************
  * @fn      PWMX_AlterOutCfg
  *
- * @brief   PWM ½»ÌæÊä³öÄ£Ê½ÅäÖÃ
+ * @brief   PWM äº¤æ›¿è¾“å‡ºæ¨¡å¼é…ç½®
  *
  * @param   ch      - select group of PWM alternate output
- *                    RB_PWM4_5_STAG_EN     -  PWM4 ºÍ PWM5 Í¨µÀ½»ÌæÊä³ö
+ *                    RB_PWM4_5_STAG_EN     -  PWM4 å’Œ PWM5 é€šé“äº¤æ›¿è¾“å‡º
  * @param   s       - control pwmx function, ENABLE or DISABLE
  *
  * @return  none
@@ -189,7 +189,7 @@ void PWMX_AlterOutCfg(uint8_t ch, FunctionalState s)
 /*********************************************************************
  * @fn      PWMX_SyncOutCfg
  *
- * @brief   PWM Í¬²½Êä³öÄ£Ê½ÅäÖÃ
+ * @brief   PWM åŒæ­¥è¾“å‡ºæ¨¡å¼é…ç½®
  *
  * @param   s       - control pwmx function, ENABLE or DISABLE
  *
@@ -211,13 +211,13 @@ void PWMX_SyncOutCfg(FunctionalState s)
 /*********************************************************************
  * @fn      PWM_DMACfg
  *
- * @brief   ÅäÖÃPWM DMA¹¦ÄÜ
+ * @brief   é…ç½®PWM DMAåŠŸèƒ½
  *
- * @param   s           - ÊÇ·ñ´ò¿ªDMA¹¦ÄÜ
- * @param   startAddr   - DMA ÆğÊ¼µØÖ·
- * @param   endAddr     - DMA ½áÊøµØÖ·
- * @param   m           - ÅäÖÃDMAÄ£Ê½
- * @param   ch          - ÅäÖÃDMAÊä³öÍ¨µÀ
+ * @param   s           - æ˜¯å¦æ‰“å¼€DMAåŠŸèƒ½
+ * @param   startAddr   - DMA èµ·å§‹åœ°å€
+ * @param   endAddr     - DMA ç»“æŸåœ°å€
+ * @param   m           - é…ç½®DMAæ¨¡å¼
+ * @param   ch          - é…ç½®DMAè¾“å‡ºé€šé“
  *
  * @return  none
  */

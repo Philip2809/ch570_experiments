@@ -20,22 +20,22 @@ extern "C" {
 /**
  * @brief  SPI interrupt bit define
  */
-#define SPI_IT_FST_BYTE    RB_SPI_IE_FST_BYTE  // ´Ó»úÄ£Ê½µÄÊ××Ö½ÚÃüÁîÄ£Ê½ÏÂ£¬½ÓÊÕµ½Ê××Ö½ÚÖĞ¶Ï
-#define SPI_IT_FIFO_OV     RB_SPI_IE_FIFO_OV   // FIFO Òç³ö
-#define SPI_IT_DMA_END     RB_SPI_IE_DMA_END   // DMA ´«Êä½áÊø
-#define SPI_IT_FIFO_HF     RB_SPI_IE_FIFO_HF   // FIFO Ê¹ÓÃ¹ı°ë
-#define SPI_IT_BYTE_END    RB_SPI_IE_BYTE_END  // µ¥×Ö½Ú´«ÊäÍê³É
-#define SPI_IT_CNT_END     RB_SPI_IE_CNT_END   // È«²¿×Ö½Ú´«ÊäÍê³É
+#define SPI_IT_FST_BYTE    RB_SPI_IE_FST_BYTE  // ä»æœºæ¨¡å¼çš„é¦–å­—èŠ‚å‘½ä»¤æ¨¡å¼ä¸‹ï¼Œæ¥æ”¶åˆ°é¦–å­—èŠ‚ä¸­æ–­
+#define SPI_IT_FIFO_OV     RB_SPI_IE_FIFO_OV   // FIFO æº¢å‡º
+#define SPI_IT_DMA_END     RB_SPI_IE_DMA_END   // DMA ä¼ è¾“ç»“æŸ
+#define SPI_IT_FIFO_HF     RB_SPI_IE_FIFO_HF   // FIFO ä½¿ç”¨è¿‡åŠ
+#define SPI_IT_BYTE_END    RB_SPI_IE_BYTE_END  // å•å­—èŠ‚ä¼ è¾“å®Œæˆ
+#define SPI_IT_CNT_END     RB_SPI_IE_CNT_END   // å…¨éƒ¨å­—èŠ‚ä¼ è¾“å®Œæˆ
 
 /**
  * @brief  Configuration data mode
  */
 typedef enum
 {
-    Mode0_LowBitINFront = 0, // Ä£Ê½0£¬µÍÎ»ÔÚÇ°
-    Mode0_HighBitINFront,    // Ä£Ê½0£¬¸ßÎ»ÔÚÇ°
-    Mode3_LowBitINFront,     // Ä£Ê½3£¬µÍÎ»ÔÚÇ°
-    Mode3_HighBitINFront,    // Ä£Ê½3£¬¸ßÎ»ÔÚÇ°
+    Mode0_LowBitINFront = 0, // æ¨¡å¼0ï¼Œä½ä½åœ¨å‰
+    Mode0_HighBitINFront,    // æ¨¡å¼0ï¼Œé«˜ä½åœ¨å‰
+    Mode3_LowBitINFront,     // æ¨¡å¼3ï¼Œä½ä½åœ¨å‰
+    Mode3_HighBitINFront,    // æ¨¡å¼3ï¼Œé«˜ä½åœ¨å‰
 } ModeBitOrderTypeDef;
 
 /**
@@ -43,182 +43,182 @@ typedef enum
  */
 typedef enum
 {
-    Mode_DataStream = 0, // Êı¾İÁ÷Ä£Ê½
-    Mose_FirstCmd,       // Ê××Ö½ÚÃüÁîÄ£Ê½
+    Mode_DataStream = 0, // æ•°æ®æµæ¨¡å¼
+    Mose_FirstCmd,       // é¦–å­—èŠ‚å‘½ä»¤æ¨¡å¼
 } Slave_ModeTypeDef;
 
 /**
- * @brief   Ö÷»úÄ£Ê½Ä¬ÈÏ³õÊ¼»¯£ºÄ£Ê½0+3ÏßÈ«Ë«¹¤+8MHz
+ * @brief   ä¸»æœºæ¨¡å¼é»˜è®¤åˆå§‹åŒ–ï¼šæ¨¡å¼0+3çº¿å…¨åŒå·¥+8MHz
  */
 void SPI_MasterDefInit(void);
 
 /**
- * @brief   Ö÷»ú2Ïß·¢ËÍÄ£Ê½³õÊ¼»¯£ºÄ£Ê½1+2Ïß°ëË«¹¤+8MHz
+ * @brief   ä¸»æœº2çº¿å‘é€æ¨¡å¼åˆå§‹åŒ–ï¼šæ¨¡å¼1+2çº¿åŠåŒå·¥+8MHz
  */
 void SPI_2WIRE_MasterOutputInit(void);
 
 /**
- * @brief   Ö÷»ú2Ïß½ÓÊÕÄ£Ê½³õÊ¼»¯£ºÄ£Ê½1+2Ïß°ëË«¹¤+8MHz
+ * @brief   ä¸»æœº2çº¿æ¥æ”¶æ¨¡å¼åˆå§‹åŒ–ï¼šæ¨¡å¼1+2çº¿åŠåŒå·¥+8MHz
  */
 void SPI_2WIRE_MasterReceiveInit(void);
 
 /**
- * @brief   ´Ó»ú2Ïß½ÓÊÕÄ£Ê½³õÊ¼»¯
+ * @brief   ä»æœº2çº¿æ¥æ”¶æ¨¡å¼åˆå§‹åŒ–
  */
 void SPI_2WIRE_SlaveInputInit(void);
 
 /**
- * @brief   ´Ó»ú2Ïß·¢ËÍÄ£Ê½³õÊ¼»¯
+ * @brief   ä»æœº2çº¿å‘é€æ¨¡å¼åˆå§‹åŒ–
  */
 void SPI_2WIRE_SlaveOutputInit(void);
 
 /**
- * @brief   SPI »ù×¼Ê±ÖÓÅäÖÃ£¬= d*Tsys
+ * @brief   SPI åŸºå‡†æ—¶é’Ÿé…ç½®ï¼Œ= d*Tsys
  *
- * @param   c       - Ê±ÖÓ·ÖÆµÏµÊı
+ * @param   c       - æ—¶é’Ÿåˆ†é¢‘ç³»æ•°
  */
 void SPI_CLKCfg(uint8_t c);
 
 /**
- * @brief   ÉèÖÃÊı¾İÁ÷Ä£Ê½
+ * @brief   è®¾ç½®æ•°æ®æµæ¨¡å¼
  *
- * @param   m       - Êı¾İÁ÷Ä£Ê½ refer to ModeBitOrderTypeDef
+ * @param   m       - æ•°æ®æµæ¨¡å¼ refer to ModeBitOrderTypeDef
  */
 void SPI_DataMode(ModeBitOrderTypeDef m);
 
 /**
- * @brief   ·¢ËÍµ¥×Ö½Ú (buffer)
+ * @brief   å‘é€å•å­—èŠ‚ (buffer)
  *
- * @param   d       - ·¢ËÍ×Ö½Ú
+ * @param   d       - å‘é€å­—èŠ‚
  */
 void SPI_MasterSendByte(uint8_t d);
 
 /**
- * @brief   ½ÓÊÕµ¥×Ö½Ú (buffer)
+ * @brief   æ¥æ”¶å•å­—èŠ‚ (buffer)
  *
  * @param   none
  */
 uint8_t SPI_MasterRecvByte(void);
 
 /**
- * @brief   Ê¹ÓÃFIFOÁ¬Ğø·¢ËÍ¶à×Ö½Ú
+ * @brief   ä½¿ç”¨FIFOè¿ç»­å‘é€å¤šå­—èŠ‚
  *
- * @param   pbuf    - ´ı·¢ËÍµÄÊı¾İÄÚÈİÊ×µØÖ·
- * @param   len     - ÇëÇó·¢ËÍµÄÊı¾İ³¤¶È£¬×î´ó4095
+ * @param   pbuf    - å¾…å‘é€çš„æ•°æ®å†…å®¹é¦–åœ°å€
+ * @param   len     - è¯·æ±‚å‘é€çš„æ•°æ®é•¿åº¦ï¼Œæœ€å¤§4095
  */
 void SPI_MasterTrans(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   Ê¹ÓÃFIFOÁ¬Ğø½ÓÊÕ¶à×Ö½Ú
+ * @brief   ä½¿ç”¨FIFOè¿ç»­æ¥æ”¶å¤šå­—èŠ‚
  *
- * @param   pbuf    - ´ı½ÓÊÕµÄÊı¾İÊ×µØÖ·
- * @param   len     - ´ı½ÓÊÕµÄÊı¾İ³¤¶È£¬×î´ó4095
+ * @param   pbuf    - å¾…æ¥æ”¶çš„æ•°æ®é¦–åœ°å€
+ * @param   len     - å¾…æ¥æ”¶çš„æ•°æ®é•¿åº¦ï¼Œæœ€å¤§4095
  */
 void SPI_MasterRecv(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   DMA·½Ê½Á¬Ğø·¢ËÍÊı¾İ
+ * @brief   DMAæ–¹å¼è¿ç»­å‘é€æ•°æ®
  *
- * @param   pbuf    - ´ı·¢ËÍÊı¾İÆğÊ¼µØÖ·,ĞèÒªËÄ×Ö½Ú¶ÔÆä
- * @param   len     - ´ı·¢ËÍÊı¾İ³¤¶È
+ * @param   pbuf    - å¾…å‘é€æ•°æ®èµ·å§‹åœ°å€,éœ€è¦å››å­—èŠ‚å¯¹å…¶
+ * @param   len     - å¾…å‘é€æ•°æ®é•¿åº¦
  */
 void SPI_MasterDMATrans(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   DMA·½Ê½Á¬Ğø½ÓÊÕÊı¾İ
+ * @brief   DMAæ–¹å¼è¿ç»­æ¥æ”¶æ•°æ®
  *
- * @param   pbuf    - ´ı½ÓÊÕÊı¾İ´æ·ÅÆğÊ¼µØÖ·,ĞèÒªËÄ×Ö½Ú¶ÔÆä
- * @param   len     - ´ı½ÓÊÕÊı¾İ³¤¶È
+ * @param   pbuf    - å¾…æ¥æ”¶æ•°æ®å­˜æ”¾èµ·å§‹åœ°å€,éœ€è¦å››å­—èŠ‚å¯¹å…¶
+ * @param   len     - å¾…æ¥æ”¶æ•°æ®é•¿åº¦
  */
 void SPI_MasterDMARecv(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   ¼ÓÔØÊ××Ö½ÚÊı¾İÄÚÈİ
+ * @brief   åŠ è½½é¦–å­—èŠ‚æ•°æ®å†…å®¹
  *
- * @param   d       - Ê××Ö½ÚÊı¾İÄÚÈİ
+ * @param   d       - é¦–å­—èŠ‚æ•°æ®å†…å®¹
  */
 #define SetFirstData(d)    (R8_SPI_SLAVE_PRE = d)
 
 /**
- * @brief   ´Ó»úÄ£Ê½³õÊ¼»¯
+ * @brief   ä»æœºæ¨¡å¼åˆå§‹åŒ–
  */
 void SPI_SlaveInit(void);
 
 /**
- * @brief   ´Ó»ú2ÏßÄ£Ê½³õÊ¼»¯
+ * @brief   ä»æœº2çº¿æ¨¡å¼åˆå§‹åŒ–
  */
 void SPI_2WIRE_SlaveInit(void);
 
 /**
- * @brief   ´Ó»úÄ£Ê½£¬·¢ËÍÒ»×Ö½ÚÊı¾İ
+ * @brief   ä»æœºæ¨¡å¼ï¼Œå‘é€ä¸€å­—èŠ‚æ•°æ®
  *
- * @param   d       - ´ı·¢ËÍÊı¾İ
+ * @param   d       - å¾…å‘é€æ•°æ®
  */
 void SPI_SlaveSendByte(uint8_t d);
 
 /**
- * @brief   ´Ó»úÄ£Ê½£¬½ÓÊÕÒ»×Ö½ÚÊı¾İ
+ * @brief   ä»æœºæ¨¡å¼ï¼Œæ¥æ”¶ä¸€å­—èŠ‚æ•°æ®
  *
- * @return  ½ÓÊÕµ½Êı¾İ
+ * @return  æ¥æ”¶åˆ°æ•°æ®
  */
 uint8_t SPI_SlaveRecvByte(void);
 
 /**
- * @brief   ´Ó»úÄ£Ê½£¬·¢ËÍ¶à×Ö½ÚÊı¾İ
+ * @brief   ä»æœºæ¨¡å¼ï¼Œå‘é€å¤šå­—èŠ‚æ•°æ®
  *
- * @param   pbuf    - ´ı·¢ËÍµÄÊı¾İÄÚÈİÊ×µØÖ·
- * @param   len     - ÇëÇó·¢ËÍµÄÊı¾İ³¤¶È£¬×î´ó4095
+ * @param   pbuf    - å¾…å‘é€çš„æ•°æ®å†…å®¹é¦–åœ°å€
+ * @param   len     - è¯·æ±‚å‘é€çš„æ•°æ®é•¿åº¦ï¼Œæœ€å¤§4095
  */
 void SPI_SlaveTrans(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   ´Ó»úÄ£Ê½£¬½ÓÊÕ¶à×Ö½ÚÊı¾İ
+ * @brief   ä»æœºæ¨¡å¼ï¼Œæ¥æ”¶å¤šå­—èŠ‚æ•°æ®
  *
- * @param   pbuf    - ½ÓÊÕÊÕÊı¾İ´æ·ÅÆğÊ¼µØÖ·
- * @param   len     - ÇëÇó½ÓÊÕÊı¾İ³¤¶È
+ * @param   pbuf    - æ¥æ”¶æ”¶æ•°æ®å­˜æ”¾èµ·å§‹åœ°å€
+ * @param   len     - è¯·æ±‚æ¥æ”¶æ•°æ®é•¿åº¦
  */
 void SPI_SlaveRecv(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   DMA·½Ê½Á¬Ğø·¢ËÍÊı¾İ
+ * @brief   DMAæ–¹å¼è¿ç»­å‘é€æ•°æ®
  *
- * @param   pbuf    - ´ı·¢ËÍÊı¾İÆğÊ¼µØÖ·,ĞèÒªËÄ×Ö½Ú¶ÔÆä
- * @param   len     - ´ı·¢ËÍÊı¾İ³¤¶È
+ * @param   pbuf    - å¾…å‘é€æ•°æ®èµ·å§‹åœ°å€,éœ€è¦å››å­—èŠ‚å¯¹å…¶
+ * @param   len     - å¾…å‘é€æ•°æ®é•¿åº¦
  */
 void SPI_SlaveDMATrans(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   DMA·½Ê½Á¬Ğø½ÓÊÕÊı¾İ
+ * @brief   DMAæ–¹å¼è¿ç»­æ¥æ”¶æ•°æ®
  *
- * @param   pbuf    - ´ı½ÓÊÕÊı¾İ´æ·ÅÆğÊ¼µØÖ·,ĞèÒªËÄ×Ö½Ú¶ÔÆä
- * @param   len     - ´ı½ÓÊÕÊı¾İ³¤¶È
+ * @param   pbuf    - å¾…æ¥æ”¶æ•°æ®å­˜æ”¾èµ·å§‹åœ°å€,éœ€è¦å››å­—èŠ‚å¯¹å…¶
+ * @param   len     - å¾…æ¥æ”¶æ•°æ®é•¿åº¦
  */
 void SPI_SlaveDMARecv(uint8_t *pbuf, uint16_t len);
 
 /**
- * @brief   ÅäÖÃSPIÖĞ¶Ï
+ * @brief   é…ç½®SPIä¸­æ–­
  *
- * @param   s       - Ê¹ÄÜ/¹Ø±Õ
+ * @param   s       - ä½¿èƒ½/å…³é—­
  * @param   f       - refer to SPI interrupt bit define
  */
 #define SPI_ITCfg(s, f)       ((s) ? (R8_SPI_INTER_EN |= f) : (R8_SPI_INTER_EN &= ~f))
 
 /**
- * @brief   »ñÈ¡ÖĞ¶Ï±êÖ¾×´Ì¬£¬0-Î´ÖÃÎ»£¬(!0)-´¥·¢
+ * @brief   è·å–ä¸­æ–­æ ‡å¿—çŠ¶æ€ï¼Œ0-æœªç½®ä½ï¼Œ(!0)-è§¦å‘
  *
  * @param   f       - refer to SPI interrupt bit define
  */
 #define SPI_GetITFlag(f)      (R8_SPI_INT_FLAG & f)
 
 /**
- * @brief   Çå³ıµ±Ç°ÖĞ¶Ï±êÖ¾
+ * @brief   æ¸…é™¤å½“å‰ä¸­æ–­æ ‡å¿—
  *
  * @param   f       - refer to SPI interrupt bit define
  */
 #define SPI_ClearITFlag(f)    (R8_SPI_INT_FLAG = f)
 
 /**
- * @brief   ¹Ø±ÕSPI
+ * @brief   å…³é—­SPI
  */
 #define SPI_Disable()         (R8_SPI_CTRL_MOD &= ~(RB_SPI_MOSI_OE | RB_SPI_SCK_OE | RB_SPI_MISO_OE))
 

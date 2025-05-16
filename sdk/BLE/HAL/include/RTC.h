@@ -40,6 +40,7 @@ extern "C" {
 #define MS_TO_RTC(ms)               ((uint32_t)((ms) * CLK_PER_MS + 0.5))
 
 extern volatile uint32_t RTCTigFlag;
+extern uint32_t lsiFrq;
 
 /**
  * @brief   Initialize time Service.
@@ -47,11 +48,18 @@ extern volatile uint32_t RTCTigFlag;
 void HAL_TimeInit(void);
 
 /**
- * @brief   配置RTC触发时间
+ * @brief   閰嶇疆RTC瑙﹀彂鏃堕棿
  *
- * @param   time    - 触发时间.
+ * @param   time    - 瑙﹀彂鏃堕棿.
  */
 extern void RTC_SetTignTime(uint32_t time);
+
+/**
+ * @brief   閰嶇疆BLE鐩稿叧鏃堕棿
+ *
+ * @param   lsifreq    - LSI棰戠巼.
+ */
+extern bleClockConfig_t BLE_ClockConfig(uint32_t lsifreq);
 
 #ifdef __cplusplus
 }

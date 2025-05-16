@@ -15,10 +15,10 @@
 /*********************************************************************
  * @fn      GPIOA_ModeCfg
  *
- * @brief   GPIOA¶Ë¿ÚÒı½ÅÄ£Ê½ÅäÖÃ
+ * @brief   GPIOAç«¯å£å¼•è„šæ¨¡å¼é…ç½®
  *
  * @param   pin     - PA0-PA15
- * @param   mode    - ÊäÈëÊä³öÀàĞÍ
+ * @param   mode    - è¾“å…¥è¾“å‡ºç±»å‹
  *
  * @return  none
  */
@@ -62,10 +62,10 @@ void GPIOA_ModeCfg(uint32_t pin, GPIOModeTypeDef mode)
 /*********************************************************************
  * @fn      GPIOA_ITModeCfg
  *
- * @brief   GPIOAÒı½ÅÖĞ¶ÏÄ£Ê½ÅäÖÃ
+ * @brief   GPIOAå¼•è„šä¸­æ–­æ¨¡å¼é…ç½®
  *
  * @param   pin     - PA0-PA15
- * @param   mode    - ´¥·¢ÀàĞÍ
+ * @param   mode    - è§¦å‘ç±»å‹
  *
  * @return  none
  */
@@ -73,22 +73,22 @@ void GPIOA_ITModeCfg(uint32_t pin, GPIOITModeTpDef mode)
 {
     switch(mode)
     {
-        case GPIO_ITMode_LowLevel: // µÍµçÆ½´¥·¢
+        case GPIO_ITMode_LowLevel: // ä½ç”µå¹³è§¦å‘
             R16_PA_INT_MODE &= ~pin;
             R32_PA_CLR |= pin;
             break;
 
-        case GPIO_ITMode_HighLevel: // ¸ßµçÆ½´¥·¢
+        case GPIO_ITMode_HighLevel: // é«˜ç”µå¹³è§¦å‘
             R16_PA_INT_MODE &= ~pin;
             R32_PA_OUT |= pin;
             break;
 
-        case GPIO_ITMode_FallEdge: // ÏÂ½µÑØ´¥·¢
+        case GPIO_ITMode_FallEdge: // ä¸‹é™æ²¿è§¦å‘
             R16_PA_INT_MODE |= pin;
             R32_PA_CLR |= pin;
             break;
 
-        case GPIO_ITMode_RiseEdge: // ÉÏÉıÑØ´¥·¢
+        case GPIO_ITMode_RiseEdge: // ä¸Šå‡æ²¿è§¦å‘
             R16_PA_INT_MODE |= pin;
             R32_PA_OUT |= pin;
             break;
@@ -103,10 +103,10 @@ void GPIOA_ITModeCfg(uint32_t pin, GPIOITModeTpDef mode)
 /*********************************************************************
  * @fn      GPIOPinRemap
  *
- * @brief   ÍâÉè¹¦ÄÜÒı½ÅÓ³Éä
+ * @brief   å¤–è®¾åŠŸèƒ½å¼•è„šæ˜ å°„
  *
- * @param   s       - ÊÇ·ñÊ¹ÄÜÓ³Éä
- * @param   perph   - Ğ´¾ßÌåµÄÓ³Éä¹ØÏµ£¬Ïê¼ûGPIO_pins_remap_define
+ * @param   s       - æ˜¯å¦ä½¿èƒ½æ˜ å°„
+ * @param   perph   - å†™å…·ä½“çš„æ˜ å°„å…³ç³»ï¼Œè¯¦è§GPIO_pins_remap_define
  *
  *
  * @return  none
@@ -115,7 +115,6 @@ void GPIOPinRemap(FunctionalState s, uint16_t perph)
 {
     if(s)
     {
-        R16_PIN_ALTERNATE_H &= ~RB_UART_TXD; // ¸Ã¼Ä´æÆ÷½öÔÚÉÏµç¸´Î»ºÍShutDownË¯ÃßÊ±Çå0
         R16_PIN_ALTERNATE_H |= perph;
     }
     else
@@ -124,13 +123,12 @@ void GPIOPinRemap(FunctionalState s, uint16_t perph)
     }
 }
 
-
 /*********************************************************************
  * @fn      GPIOADigitalCfg
  *
- * @brief   I/O pinÊı×Ö¹¦ÄÜ¿ØÖÆ
+ * @brief   I/O pinæ•°å­—åŠŸèƒ½æ§åˆ¶
  *
- * @param   s       - ÊÇ·ñ´ò¿ª¶ÔÓ¦I/O pinÊı×Ö¹¦ÄÜ
+ * @param   s       - æ˜¯å¦æ‰“å¼€å¯¹åº”I/O pinæ•°å­—åŠŸèƒ½
  * @param   pin     - PA0-PA11
  */
 void GPIOADigitalCfg(FunctionalState s, uint16_t pin)

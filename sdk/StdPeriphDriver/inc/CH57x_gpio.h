@@ -49,44 +49,44 @@ extern "C" {
 /**
  * @brief   GPIO_pins_remap_define
  */
-#define REMAP_RXD_PA2   0x00  /*!<Ä¬ÈÏÓ³Éä£¨RXD/PA2£© */
-#define REMAP_RXD_PA3   0x01  /*!<ÖØÓ³Éä£¨RXD/PA3£© */
-#define REMAP_RXD_PA0   0x02  /*!<ÖØÓ³Éä£¨RXD/PA0£© */
-#define REMAP_RXD_PA1   0x03  /*!<ÖØÓ³Éä£¨RXD/PA1£© */
-#define REMAP_RXD_PA4   0x04  /*!<ÖØÓ³Éä£¨RXD/PA4£© */
-#define REMAP_RXD_PA9   0x05  /*!<ÖØÓ³Éä£¨RXD/PA9£© */
-#define REMAP_RXD_PA10  0x06  /*!<ÖØÓ³Éä£¨RXD/PA10£© */
-#define REMAP_RXD_PA11  0x07  /*!<ÖØÓ³Éä£¨RXD/PA11£© */
+#define REMAP_RXD_PA2   0x00  /*!<é»˜è®¤æ˜ å°„ï¼ˆRXD/PA2ï¼‰ */
+#define REMAP_RXD_PA3   0x01  /*!<é‡æ˜ å°„ï¼ˆRXD/PA3ï¼‰ */
+#define REMAP_RXD_PA0   0x02  /*!<é‡æ˜ å°„ï¼ˆRXD/PA0ï¼‰ */
+#define REMAP_RXD_PA1   0x03  /*!<é‡æ˜ å°„ï¼ˆRXD/PA1ï¼‰ */
+#define REMAP_RXD_PA4   0x04  /*!<é‡æ˜ å°„ï¼ˆRXD/PA4ï¼‰ */
+#define REMAP_RXD_PA9   0x05  /*!<é‡æ˜ å°„ï¼ˆRXD/PA9ï¼‰ */
+#define REMAP_RXD_PA10  0x06  /*!<é‡æ˜ å°„ï¼ˆRXD/PA10ï¼‰ */
+#define REMAP_RXD_PA11  0x07  /*!<é‡æ˜ å°„ï¼ˆRXD/PA11ï¼‰ */
 
-#define REMAP_TXD_PA3   0x00  /*!<Ä¬ÈÏÓ³Éä£¨TXD/PA3£© */
-#define REMAP_TXD_PA2   0x08  /*!<ÖØÓ³Éä£¨TXD/PA2£© */
-#define REMAP_TXD_PA1   0x10  /*!<ÖØÓ³Éä£¨TXD/PA1£© */
-#define REMAP_TXD_PA0   0x18  /*!<ÖØÓ³Éä£¨TXD/PA0£© */
-#define REMAP_TXD_PA7   0x20  /*!<ÖØÓ³Éä£¨TXD/PA7£© */
-#define REMAP_TXD_PA8   0x28  /*!<ÖØÓ³Éä£¨TXD/PA8£© */
-#define REMAP_TXD_PA11  0x30  /*!<ÖØÓ³Éä£¨TXD/PA11£© */
-#define REMAP_TXD_PA10  0x38  /*!<ÖØÓ³Éä£¨TXD/PA10£© */
+#define REMAP_TXD_PA3   0x00  /*!<é»˜è®¤æ˜ å°„ï¼ˆTXD/PA3ï¼‰ */
+#define REMAP_TXD_PA2   0x08  /*!<é‡æ˜ å°„ï¼ˆTXD/PA2ï¼‰ */
+#define REMAP_TXD_PA1   0x10  /*!<é‡æ˜ å°„ï¼ˆTXD/PA1ï¼‰ */
+#define REMAP_TXD_PA0   0x18  /*!<é‡æ˜ å°„ï¼ˆTXD/PA0ï¼‰ */
+#define REMAP_TXD_PA7   0x20  /*!<é‡æ˜ å°„ï¼ˆTXD/PA7ï¼‰ */
+#define REMAP_TXD_PA8   0x28  /*!<é‡æ˜ å°„ï¼ˆTXD/PA8ï¼‰ */
+#define REMAP_TXD_PA11  0x30  /*!<é‡æ˜ å°„ï¼ˆTXD/PA11ï¼‰ */
+#define REMAP_TXD_PA10  0x38  /*!<é‡æ˜ å°„ï¼ˆTXD/PA10ï¼‰ */
 
-#define REMAP_TMR_DEFAULT   0x00   /*!<Ä¬ÈÏÓ³Éä£¨PWM0/PA7£¬CAP_IN1/PA7£¬CAP_IN2/PA2£© */
-#define REMAP_TMR_MODE1     0x40   /*!<ÖØÓ³Éä1 £¨PWM0/PA2£¬CAP_IN1/PA2£¬CAP_IN2/PA7£© */
-#define REMAP_TMR_MODE2     0x80   /*!<ÖØÓ³Éä2£¨PWM0/PA4£¬CAP_IN1/PA4£¬CAP_IN2/PA9£© */
-#define REMAP_TMR_MODE3     0xC0   /*!<ÖØÓ³Éä3£¨PWM0/PA9£¬CAP_IN1/PA9£¬CAP_IN2/PA4£© */
+#define REMAP_TMR_DEFAULT   0x00   /*!<é»˜è®¤æ˜ å°„ï¼ˆPWM0/PA7ï¼ŒCAP_IN1/PA7ï¼ŒCAP_IN2/PA2ï¼‰ */
+#define REMAP_TMR_MODE1     0x40   /*!<é‡æ˜ å°„1 ï¼ˆPWM0/PA2ï¼ŒCAP_IN1/PA2ï¼ŒCAP_IN2/PA7ï¼‰ */
+#define REMAP_TMR_MODE2     0x80   /*!<é‡æ˜ å°„2ï¼ˆPWM0/PA4ï¼ŒCAP_IN1/PA4ï¼ŒCAP_IN2/PA9ï¼‰ */
+#define REMAP_TMR_MODE3     0xC0   /*!<é‡æ˜ å°„3ï¼ˆPWM0/PA9ï¼ŒCAP_IN1/PA9ï¼ŒCAP_IN2/PA4ï¼‰ */
 
-#define REMAP_I2C_DEFAULT   0x00  /*!<Ä¬ÈÏÓ³Éä£¨SCL/PA8£¬SDA/PA9£© */
-#define REMAP_I2C_MODE1     0x200 /*!<ÖØÓ³Éä1 £¨SCL/PA0£¬SDA/PA1£© */
-#define REMAP_I2C_MODE2     0x400 /*!<ÖØÓ³Éä2 £¨SCL/PA3£¬SDA/PA2£© */
-#define REMAP_I2C_MODE3     0x600 /*!<ÖØÓ³Éä3 £¨SCL/PA5£¬SDA/PA6£© */
+#define REMAP_I2C_DEFAULT   0x00  /*!<é»˜è®¤æ˜ å°„ï¼ˆSCL/PA8ï¼ŒSDA/PA9ï¼‰ */
+#define REMAP_I2C_MODE1     0x200 /*!<é‡æ˜ å°„1 ï¼ˆSCL/PA0ï¼ŒSDA/PA1ï¼‰ */
+#define REMAP_I2C_MODE2     0x400 /*!<é‡æ˜ å°„2 ï¼ˆSCL/PA3ï¼ŒSDA/PA2ï¼‰ */
+#define REMAP_I2C_MODE3     0x600 /*!<é‡æ˜ å°„3 ï¼ˆSCL/PA5ï¼ŒSDA/PA6ï¼‰ */
 
 /**
  * @brief  Configuration GPIO Mode
  */
 typedef enum
 {
-    GPIO_ModeIN_Floating, //¸¡¿ÕÊäÈë
-    GPIO_ModeIN_PU,       //ÉÏÀ­ÊäÈë
-    GPIO_ModeIN_PD,       //ÏÂÀ­ÊäÈë
-    GPIO_ModeOut_PP_5mA,  //ÍÆÍìÊä³ö×î´ó5mA
-    GPIO_ModeOut_PP_20mA, //ÍÆÍìÊä³ö×î´ó20mA
+    GPIO_ModeIN_Floating, //æµ®ç©ºè¾“å…¥
+    GPIO_ModeIN_PU,       //ä¸Šæ‹‰è¾“å…¥
+    GPIO_ModeIN_PD,       //ä¸‹æ‹‰è¾“å…¥
+    GPIO_ModeOut_PP_5mA,  //æŽ¨æŒ½è¾“å‡ºæœ€å¤§5mA
+    GPIO_ModeOut_PP_20mA, //æŽ¨æŒ½è¾“å‡ºæœ€å¤§20mA
 
 } GPIOModeTypeDef;
 
@@ -95,101 +95,101 @@ typedef enum
  */
 typedef enum
 {
-    GPIO_ITMode_LowLevel,  //µÍµçÆ½´¥·¢
-    GPIO_ITMode_HighLevel, //¸ßµçÆ½´¥·¢
-    GPIO_ITMode_FallEdge,  //ÏÂ½µÑØ´¥·¢
-    GPIO_ITMode_RiseEdge,  //ÉÏÉýÑØ´¥·¢
+    GPIO_ITMode_LowLevel,  //ä½Žç”µå¹³è§¦å‘
+    GPIO_ITMode_HighLevel, //é«˜ç”µå¹³è§¦å‘
+    GPIO_ITMode_FallEdge,  //ä¸‹é™æ²¿è§¦å‘
+    GPIO_ITMode_RiseEdge,  //ä¸Šå‡æ²¿è§¦å‘
 
 } GPIOITModeTpDef;
 
 /**
- * @brief   GPIOA¶Ë¿ÚÒý½ÅÄ£Ê½ÅäÖÃ
+ * @brief   GPIOAç«¯å£å¼•è„šæ¨¡å¼é…ç½®
  *
  * @param   pin     - PA0-PA15
- * @param   mode    - ÊäÈëÊä³öÀàÐÍ
+ * @param   mode    - è¾“å…¥è¾“å‡ºç±»åž‹
  */
 void GPIOA_ModeCfg(uint32_t pin, GPIOModeTypeDef mode);
 
 /**
- * @brief   GPIOA¶Ë¿ÚÒý½ÅÊä³öÖÃµÍ
+ * @brief   GPIOAç«¯å£å¼•è„šè¾“å‡ºç½®ä½Ž
  *
  * @param   pin     - PA0-PA15
  */
 #define GPIOA_ResetBits(pin)      (R32_PA_CLR = pin)
 
 /**
- * @brief   GPIOA¶Ë¿ÚÒý½ÅÊä³öÖÃ¸ß
+ * @brief   GPIOAç«¯å£å¼•è„šè¾“å‡ºç½®é«˜
  *
  * @param   pin     - PA0-PA15
  */
 #define GPIOA_SetBits(pin)        (R32_PA_SET = pin)
 
 /**
- * @brief   GPIOA¶Ë¿ÚÒý½ÅÊä³öµçÆ½·­×ª
+ * @brief   GPIOAç«¯å£å¼•è„šè¾“å‡ºç”µå¹³ç¿»è½¬
  *
  * @param   pin     - PA0-PA15
  */
 #define GPIOA_InverseBits(pin)    (R32_PA_OUT ^= pin)
 
 /**
- * @brief   GPIOA¶Ë¿Ú32Î»Êý¾Ý·µ»Ø£¬µÍ16Î»ÓÐÐ§
+ * @brief   GPIOAç«¯å£32ä½æ•°æ®è¿”å›žï¼Œä½Ž16ä½æœ‰æ•ˆ
  *
- * @return  GPIOA¶Ë¿Ú32Î»Êý¾Ý
+ * @return  GPIOAç«¯å£32ä½æ•°æ®
  */
 #define GPIOA_ReadPort()          (R32_PA_PIN)
 
 /**
- * @brief   GPIOA¶Ë¿ÚÒý½Å×´Ì¬£¬0-Òý½ÅµÍµçÆ½£¬(!0)-Òý½Å¸ßµçÆ½
+ * @brief   GPIOAç«¯å£å¼•è„šçŠ¶æ€ï¼Œ0-å¼•è„šä½Žç”µå¹³ï¼Œ(!0)-å¼•è„šé«˜ç”µå¹³
  *
  * @param   pin     - PA0-PA15
  *
- * @return  GPIOA¶Ë¿ÚÒý½Å×´Ì¬
+ * @return  GPIOAç«¯å£å¼•è„šçŠ¶æ€
  */
 #define GPIOA_ReadPortPin(pin)    (R32_PA_PIN & (pin))
 
 /**
- * @brief   GPIOAÒý½ÅÖÐ¶ÏÄ£Ê½ÅäÖÃ
+ * @brief   GPIOAå¼•è„šä¸­æ–­æ¨¡å¼é…ç½®
  *
  * @param   pin     - PA0-PA15
- * @param   mode    - ´¥·¢ÀàÐÍ
+ * @param   mode    - è§¦å‘ç±»åž‹
  */
 void GPIOA_ITModeCfg(uint32_t pin, GPIOITModeTpDef mode);
 
 /**
- * @brief   ¶ÁÈ¡GPIOA¶Ë¿ÚÖÐ¶Ï±êÖ¾×´Ì¬
+ * @brief   è¯»å–GPIOAç«¯å£ä¸­æ–­æ ‡å¿—çŠ¶æ€
  *
- * @return  GPIOA¶Ë¿ÚÖÐ¶Ï±êÖ¾×´Ì¬
+ * @return  GPIOAç«¯å£ä¸­æ–­æ ‡å¿—çŠ¶æ€
  */
 #define GPIOA_ReadITFlagPort()       (R16_PA_INT_IF)
 
 /**
- * @brief   ¶ÁÈ¡GPIOA¶Ë¿ÚÒý½ÅÖÐ¶Ï±êÖ¾×´Ì¬
+ * @brief   è¯»å–GPIOAç«¯å£å¼•è„šä¸­æ–­æ ‡å¿—çŠ¶æ€
  *
  * @param   pin     - PA0-PA15
  *
- * @return  GPIOA¶Ë¿ÚÒý½ÅÖÐ¶Ï±êÖ¾×´Ì¬
+ * @return  GPIOAç«¯å£å¼•è„šä¸­æ–­æ ‡å¿—çŠ¶æ€
  */
 #define GPIOA_ReadITFlagBit(pin)     (R16_PA_INT_IF & (pin))
 
 /**
- * @brief   Çå³ýGPIOA¶Ë¿ÚÒý½ÅÖÐ¶Ï±êÖ¾×´Ì¬
+ * @brief   æ¸…é™¤GPIOAç«¯å£å¼•è„šä¸­æ–­æ ‡å¿—çŠ¶æ€
  *
  * @param   pin     - PA0-PA15
  */
 #define GPIOA_ClearITFlagBit(pin)    (R16_PA_INT_IF = pin)
 
 /**
- * @brief   ÍâÉè¹¦ÄÜÒý½ÅÓ³Éä
+ * @brief   å¤–è®¾åŠŸèƒ½å¼•è„šæ˜ å°„
  *
- * @param   s       - ÊÇ·ñÊ¹ÄÜÓ³Éä
- * @param   perph   - Ð´¾ßÌåµÄÓ³Éä¹ØÏµ£¬Ïê¼ûGPIO_pins_remap_define
+ * @param   s       - æ˜¯å¦ä½¿èƒ½æ˜ å°„
+ * @param   perph   - å†™å…·ä½“çš„æ˜ å°„å…³ç³»ï¼Œè¯¦è§GPIO_pins_remap_define
  */
 void GPIOPinRemap(FunctionalState s, uint16_t perph);
 
 /**
- * @brief   I/O pinÊý×Ö¹¦ÄÜ¿ØÖÆ
+ * @brief   I/O pinæ•°å­—åŠŸèƒ½æŽ§åˆ¶
  *
- * @param   s       - ÊÇ·ñ´ò¿ª¶ÔÓ¦I/O pinÊý×Ö¹¦ÄÜ
+ * @param   s       - æ˜¯å¦æ‰“å¼€å¯¹åº”I/O pinæ•°å­—åŠŸèƒ½
  * @param   pin     - PA0-PA15
  */
 void GPIOADigitalCfg(FunctionalState s, uint16_t pin);

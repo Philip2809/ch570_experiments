@@ -68,22 +68,22 @@ void  KeyPress_Wake(uint8_t s);
 #define   KeyScan_Cnt   (R32_KEY_SCAN_NUMB >> 20)
 
 /**
- * @brief   KeyScanÖĞ¶ÏÅäÖÃ
+ * @brief   KeyScanä¸­æ–­é…ç½®
  *
- * @param   s       - Ê¹ÄÜ/¹Ø±Õ
+ * @param   s       - ä½¿èƒ½/å…³é—­
  * @param   f       - refer to ENC interrupt bit define
  */
 #define KeyScan_ITCfg(s, f)       ((s) ? (R8_KEY_SCAN_INT_EN |= f) : (R8_KEY_SCAN_INT_EN &= ~f))
 
 /**
- * @brief   Çå³ıENCÖĞ¶Ï±êÖ¾
+ * @brief   æ¸…é™¤ENCä¸­æ–­æ ‡å¿—
  *
  * @param   f       - refer to ENC interrupt bit define
  */
 #define KeyScan_ClearITFlag(f)    (R8_KEY_SCAN_INT_FLAG = f)
 
 /**
- * @brief   ²éÑ¯ÖĞ¶Ï±êÖ¾×´Ì¬
+ * @brief   æŸ¥è¯¢ä¸­æ–­æ ‡å¿—çŠ¶æ€
  *
  * @param   f       - refer to ENC interrupt bit define
  */

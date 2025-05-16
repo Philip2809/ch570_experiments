@@ -52,7 +52,7 @@ _vector_base:
     .word   0
     .word   UART_IRQHandler           	/* UART */
     .word   RTC_IRQHandler             	/* RTC */
-    .word   CMP_IRQHandler             	/* ADC */
+    .word   CMP_IRQHandler             	/* CMP */
     .word   I2C_IRQHandler 			   	/* I2C */
     .word   PWMX_IRQHandler       		/* PWMX */
     .word   0
@@ -117,9 +117,9 @@ handle_reset:
 .option push 
 .option	norelax 
 	la gp, __global_pointer$
-.option	pop 
 1:
 	la sp, _eusrstack 
+.option	pop
 
 /* Load highcode code  section from flash to RAM */
 2:

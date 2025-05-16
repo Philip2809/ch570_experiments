@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /**
- * @brief   ��ȡFlash-ROM
+ * @brief   露脕脠隆Flash-ROM
  *
  * @param   StartAddr   - read address
  * @param   Buffer      - read buffer
