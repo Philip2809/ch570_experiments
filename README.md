@@ -12,5 +12,10 @@ toolchain in makefile:
 `make clean && make`
 
 `python -m venv .venv`
+install chprog in venv
 `sudo .venv/bin/python chprog.py x.bin`
 
+
+
+## Notes
+From my tests the chip works all the way down to 1704mV, bluetooth only starts working around 1830mV.
